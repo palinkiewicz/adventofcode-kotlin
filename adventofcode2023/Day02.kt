@@ -27,9 +27,32 @@ object Day02 {
             index
         })
     }
+
+    fun part2(inputs: List<String>) {
+        println(inputs.sumOf { line ->
+            val minCubes = mutableMapOf(
+                "red" to 0,
+                "green" to 0,
+                "blue" to 0
+            )
+
+            for (cubesSet in line.split(": ")[1].split("; ")) {
+                for (cubesOfType in cubesSet.split(", ")) {
+                    val numberType = cubesOfType.split(" ")
+
+                    if (minCubes[numberType[1]]!! < numberType[0].toInt()) {
+                        minCubes[numberType[1]] = numberType[0].toInt()
+                    }
+                }
+            }
+
+            minCubes.values.reduce { acc, i -> acc * i }
+        })
+    }
 }
 
 fun main() {
     val inputs = File("resources/adventofcode2023/Day02.txt").readLines()
     Day02.part1(inputs)
+    Day02.part2(inputs)
 }
