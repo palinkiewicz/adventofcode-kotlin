@@ -12,3 +12,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3)                     | [Solution](/adventofcode2023/Day03.kt) | [Inputs](/resources/adventofcode2023/Day03.txt) |
 | [Day 4: Scratchcards](https://adventofcode.com/2023/day/4)                    | [Solution](/adventofcode2023/Day04.kt) | [Inputs](/resources/adventofcode2023/Day04.txt) |
 | [Day 5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [Solution](/adventofcode2023/Day05.kt) | [Inputs](/resources/adventofcode2023/Day05.txt) |
+| [Day 6: Wait For It](https://adventofcode.com/2023/day/6)                     | [Solution](/adventofcode2023/Day06.kt) | [Inputs](/resources/adventofcode2023/Day06.txt) |
