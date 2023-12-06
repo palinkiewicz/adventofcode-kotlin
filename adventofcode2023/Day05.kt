@@ -1,6 +1,8 @@
 package adventofcode2023
 
 import java.io.File
+import kotlin.math.max
+import kotlin.math.min
 
 object Day05 {
     fun part1(inputs: List<String>) {
@@ -24,63 +26,57 @@ object Day05 {
     }
 
     fun part2(inputs: List<String>) {
-        fun getRangesMaps(): Array<MutableList<LongArray>> {
-            val rangesMaps = Array<MutableList<LongArray>>(7) { mutableListOf() }
-            var mapIndex = 0
-
-            for (i in inputs.indices.drop(2)) {
-                if (inputs[i] == "")
-                    mapIndex++
-                else if (inputs[i].split(" ").size == 3)
-                    rangesMaps[mapIndex].add(inputs[i].split(" ").map { it.toLong() }.toLongArray())
+        fun getRangesMaps(): List<List<LongArray>> = inputs
+            .joinToString("\n")
+            .split("\n\n")
+            .drop(1)
+            .map { map ->
+                map.split("\n").drop(1).map { line ->
+                    line.split(" ").map { it.toLong() }.toLongArray()
+                }
             }
 
-            return rangesMaps
-        }
-
-        fun getSeedRanges(): List<Pair<Long, Long>> {
-            val rangesLine = inputs[0].split(" ").drop(1)
-            val ranges: MutableList<Pair<Long, Long>> = mutableListOf()
-
-            for (i in rangesLine.indices) {
-                if (i % 2 == 0) ranges.add(
-                    Pair(
-                        rangesLine[i].toLong(),
-                        rangesLine[i].toLong() + rangesLine[i + 1].toLong()
-                    )
-                )
+        fun getSeedRanges(): List<Pair<Long, Long>> = inputs[0]
+            .split(" ")
+            .drop(1)
+            .windowed(2, 2)
+            .map {
+                Pair(it[0].toLong(), it[0].toLong() + it[1].toLong())
             }
 
-            return ranges
-        }
 
         val rangesMaps = getRangesMaps()
-        val seedRanges = getSeedRanges()
+        var ranges = getSeedRanges().toMutableList()
 
-        fun getSeedFromLocation(location: Long): Long {
-            var number = location
-            var mapIndex = rangesMaps.size - 1
+        for (rangesMap in rangesMaps) {
+            val newRanges = mutableListOf<Pair<Long, Long>>()
+            for (filterRange in rangesMap) {
+                var i = 0
+                while (i < ranges.size) {
+                    val range = ranges[i]
+                    val offset = filterRange[0] - filterRange[1]
+                    val overlapStart = max(filterRange[1], range.first)
+                    val overlapEnd = min(filterRange[1] + filterRange[2], range.second)
 
-            while (mapIndex >= 0) {
-                for (line in rangesMaps[mapIndex]) {
-                    if (line[0] <= number && line[0] + line[2] > number) {
-                        number = line[1] + number - line[0]
-                        break
+                    if (overlapStart < overlapEnd) {
+                        newRanges.add(Pair(offset + overlapStart, offset + overlapEnd))
+                        ranges.removeAt(i)
+
+                        if (range.second > overlapEnd) {
+                            ranges.add(Pair(overlapEnd, range.second))
+                        }
+                        if (range.first < overlapStart) {
+                            ranges.add(Pair(range.first, overlapStart))
+                        }
+                    } else {
+                        i++
                     }
                 }
-                mapIndex--
             }
-
-            return number
+            ranges = (newRanges + ranges).toMutableList()
         }
 
-        for (location in 0L..Long.MAX_VALUE) {
-            val number = getSeedFromLocation(location)
-            if (seedRanges.any { number >= it.first && number < it.second }) {
-                println(location)
-                break
-            }
-        }
+        println(ranges.minOf { it.first })
     }
 }
 
