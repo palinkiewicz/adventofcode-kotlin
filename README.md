@@ -14,3 +14,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 5: If You Give A Seed A Fertilizer](https://adventofcode.com/2023/day/5) | [Solution](/adventofcode2023/Day05.kt) | [Inputs](/resources/adventofcode2023/Day05.txt) |
 | [Day 6: Wait For It](https://adventofcode.com/2023/day/6)                     | [Solution](/adventofcode2023/Day06.kt) | [Inputs](/resources/adventofcode2023/Day06.txt) |
 | [Day 7: Camel Cards](https://adventofcode.com/2023/day/7)                     | [Solution](/adventofcode2023/Day07.kt) | [Inputs](/resources/adventofcode2023/Day07.txt) |
+| [Day 8: Haunted Wasteland](https://adventofcode.com/2023/day/8)               | [Solution](/adventofcode2023/Day08.kt) | [Inputs](/resources/adventofcode2023/Day08.txt) |
