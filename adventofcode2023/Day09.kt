@@ -3,11 +3,10 @@ package adventofcode2023
 import java.io.File
 
 object Day09 {
-    private fun getPrediction(values: List<Int>, end: Boolean = true): Int {
-        return if (values.all { it == 0 }) 0
+    private fun getPrediction(values: List<Int>, end: Boolean = true): Int =
+        if (values.all { it == 0 }) 0
         else if (end) values.last() + getPrediction(values.zipWithNext { a, b -> b - a })
         else values.first() - getPrediction(values.zipWithNext { a, b -> b - a }, end = false)
-    }
 
     fun part1(inputs: List<List<Int>>) = println(inputs.sumOf { getPrediction(it) })
 
