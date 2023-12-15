@@ -19,3 +19,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 10: Pipe Maze](https://adventofcode.com/2023/day/10)                     | [Solution](/adventofcode2023/Day10.kt)               | [Inputs](/resources/adventofcode2023/Day10.txt) |
 | [Day 11: Cosmic Expansion](https://adventofcode.com/2023/day/11)              | [Solution](/adventofcode2023/Day11.kt)               | [Inputs](/resources/adventofcode2023/Day11.txt) |
 | [Day 12: Hot Springs](https://adventofcode.com/2023/day/12)                   | [Solution (Part 1 only)](/adventofcode2023/Day12.kt) | [Inputs](/resources/adventofcode2023/Day12.txt) |
+| [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13)            | [Solution](/adventofcode2023/Day13.kt)               | [Inputs](/resources/adventofcode2023/Day13.txt) |
