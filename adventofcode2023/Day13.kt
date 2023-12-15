@@ -11,37 +11,44 @@ object Day13 {
     private fun verticalLine(list: List<String>, index: Int): String =
         list.joinToString(separator = "") { it[index].toString() }
 
-    private fun checkIfSameLines(list: List<String>, a: Int, b: Int, vertical: Boolean): Boolean
-        = (vertical && verticalLine(list, a) == verticalLine(list, b)) || (!vertical && list[a] == list[b])
+    private fun countLinesDifference(list: List<String>, a: Int, b: Int, vertical: Boolean): Int {
+        val lineA = if (vertical) verticalLine(list, a) else list[a]
+        val lineB = if (vertical) verticalLine(list, b) else list[b]
+        return lineA.withIndex().count { it.value != lineB[it.index] }
+    }
 
-    private fun findReflectionLine(list: List<String>, vertical: Boolean = false): Int? {
+    private fun findReflectionLine(
+        list: List<String>,
+        different: Int = 0,
+        vertical: Boolean = false
+    ): Int? {
         val maxIndex = if (vertical) list[0].length else list.size
+
         for (i in 0..maxIndex - 2) {
-            if (checkIfSameLines(list, i, i + 1, vertical)) {
-                var j = 1
-                var isReflection = true
+            var j = 1
+            var differentCount = countLinesDifference(list, i, i + 1, vertical)
 
-                while (i - j >= 0 && i + j + 1 < maxIndex) {
-                    if (!checkIfSameLines(list, i - j, i + j + 1, vertical)) {
-                        isReflection = false
-                        break
-                    }
-                    j++
-                }
-
-                if (isReflection) return i + 1
+            while (differentCount <= different && i - j >= 0 && i + j + 1 < maxIndex) {
+                differentCount += countLinesDifference(list, i - j, i + j + 1, vertical)
+                j++
             }
+
+            if (differentCount == different) return i + 1
         }
 
         return null
     }
 
     fun part1() = println(inputs.sumOf {
-        val ind = (findReflectionLine(it, true) ?: findReflectionLine(it)?.times(100))
-        ind!!.toInt()
+        (findReflectionLine(it, vertical = true) ?: findReflectionLine(it)?.times(100))!!.toInt()
+    })
+
+    fun part2() = println(inputs.sumOf {
+        (findReflectionLine(it, 1, vertical = true) ?: findReflectionLine(it, 1)?.times(100))!!.toInt()
     })
 }
 
 fun main() {
     Day13.part1()
+    Day13.part2()
 }
