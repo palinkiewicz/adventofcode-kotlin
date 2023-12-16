@@ -21,3 +21,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 12: Hot Springs](https://adventofcode.com/2023/day/12)                   | [Solution (Part 1 only)](/adventofcode2023/Day12.kt) | [Inputs](/resources/adventofcode2023/Day12.txt) |
 | [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13)            | [Solution](/adventofcode2023/Day13.kt)               | [Inputs](/resources/adventofcode2023/Day13.txt) |
 | [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14)      | [Solution](/adventofcode2023/Day14.kt)               | [Inputs](/resources/adventofcode2023/Day14.txt) |
+| [Day 15: Lens Library](https://adventofcode.com/2023/day/15)                  | [Solution](/adventofcode2023/Day15.kt)               | [Inputs](/resources/adventofcode2023/Day15.txt) |
