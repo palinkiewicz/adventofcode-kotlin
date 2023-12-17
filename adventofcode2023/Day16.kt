@@ -84,8 +84,31 @@ object Day16 {
         beamLocations.sumOf { line -> line.count { it.isNotEmpty() } }
 
     fun part1() = println(countEnergizedTiles(getBeamLocations(0, 0, RIGHTWARDS)))
+
+    fun part2() {
+        var max = 0
+
+        for (y in inputs.indices) {
+            max = maxOf(
+                max,
+                countEnergizedTiles(getBeamLocations(0, y, RIGHTWARDS)),
+                countEnergizedTiles(getBeamLocations(inputs[y].length - 1, y, LEFTWARDS))
+            )
+        }
+
+        for (x in inputs[0].indices) {
+            max = maxOf(
+                max,
+                countEnergizedTiles(getBeamLocations(x, 0, DOWNWARDS)),
+                countEnergizedTiles(getBeamLocations(x, inputs.size - 1, UPWARDS))
+            )
+        }
+
+        println(max)
+    }
 }
 
 fun main() {
     Day16.part1()
+    Day16.part2()
 }
