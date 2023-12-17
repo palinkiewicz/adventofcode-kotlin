@@ -22,3 +22,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 13: Point of Incidence](https://adventofcode.com/2023/day/13)            | [Solution](/adventofcode2023/Day13.kt)               | [Inputs](/resources/adventofcode2023/Day13.txt) |
 | [Day 14: Parabolic Reflector Dish](https://adventofcode.com/2023/day/14)      | [Solution](/adventofcode2023/Day14.kt)               | [Inputs](/resources/adventofcode2023/Day14.txt) |
 | [Day 15: Lens Library](https://adventofcode.com/2023/day/15)                  | [Solution](/adventofcode2023/Day15.kt)               | [Inputs](/resources/adventofcode2023/Day15.txt) |
+| [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16)        | [Solution](/adventofcode2023/Day16.kt)               | [Inputs](/resources/adventofcode2023/Day16.txt) |
