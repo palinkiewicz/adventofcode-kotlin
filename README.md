@@ -24,3 +24,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 15: Lens Library](https://adventofcode.com/2023/day/15)                  | [Solution](/adventofcode2023/Day15.kt)               | [Inputs](/resources/adventofcode2023/Day15.txt) |
 | [Day 16: The Floor Will Be Lava](https://adventofcode.com/2023/day/16)        | [Solution](/adventofcode2023/Day16.kt)               | [Inputs](/resources/adventofcode2023/Day16.txt) |
 | [Day 17: Clumsy Crucible](https://adventofcode.com/2023/day/17)               | [Solution](/adventofcode2023/Day17.kt)               | [Inputs](/resources/adventofcode2023/Day17.txt) |
+| [Day 18: Lavaduct Lagoon](https://adventofcode.com/2023/day/18)               | [Solution](/adventofcode2023/Day18.kt)               | [Inputs](/resources/adventofcode2023/Day18.txt) |
