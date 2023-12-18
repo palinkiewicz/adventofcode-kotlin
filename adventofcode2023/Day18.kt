@@ -32,21 +32,16 @@ object Day18 {
             else -> throw Exception("Unknown direction")
         }
 
-    private fun cornerPositions(digPlan: List<Vector2>): List<Vector2> {
-        val positions = mutableListOf(Vector2(0, 0))
-
-        digPlan.forEach { shiftVector ->
-            positions.add(positions.last().add(shiftVector))
+    private fun cornerPositions(digPlan: List<Vector2>): List<Vector2> =
+        digPlan.scan(Vector2(0, 0)) { acc, shiftVector ->
+            acc.add(shiftVector)
         }
-
-        return positions
-    }
 
     private fun perimeter(digPlan: List<Vector2>): Long =
         digPlan.sumOf { abs(it.x) + abs(it.y) }
 
     private fun shoelaceFormula(corners: List<Vector2>): Long =
-        (corners + listOf(corners.first())).zipWithNext { a, b ->
+        corners.zipWithNext { a, b ->
             a.x * b.y - a.y * b.x
         }.sum() / 2
 
