@@ -101,9 +101,7 @@ object Day19 {
 
         while (ranges.isNotEmpty()) {
             val range = ranges.removeFirst()
-            val valueRanges = range.first
-            val workflowName = range.second
-            val stepIndex = range.third
+            val (valueRanges, workflowName, stepIndex) = range
 
             when (workflowName) {
                 ACCEPT -> {
