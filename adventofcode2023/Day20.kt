@@ -79,7 +79,7 @@ object Day20 {
         return pulseCount
     }
 
-    private fun multiplePushButton(times: Int): Map<Boolean, Long> {
+    private fun highLowPulsesCounts(times: Int): Map<Boolean, Long> {
         val pulseCount = mutableMapOf(true to 0L, false to 0L)
 
         for (i in 1..times)
@@ -88,9 +88,48 @@ object Day20 {
         return pulseCount
     }
 
-    fun part1() = println(multiplePushButton(1000).values.reduce { acc, i -> acc * i })
+    private fun pushesToGetRx(): Long {
+        val beforeRxName = modules.filter { it.value.outputs.contains("rx") }.map { it.key }.single()
+        val beforeRxInputsCounts = modules.filter { it.value.outputs.contains(beforeRxName) }.mapValues { 0L }.toMutableMap()
+        var pushCount = 0L
+
+        while (beforeRxInputsCounts.any { it.value == 0L }) {
+            pushCount++
+
+            val queue = LinkedList<Triple<String, Boolean, String>>()
+
+            queue.add(Triple("broadcaster", false, ""))
+
+            while (queue.isNotEmpty()) {
+                val (destination, pulse, from) = queue.removeFirst()
+                val module = modules[destination]
+
+                if (destination == beforeRxName && pulse) {
+                    beforeRxInputsCounts[from] = pushCount
+                }
+
+                module?.send(pulse, from)?.forEach {
+                    queue.add(Triple(it.key, it.value, destination))
+                }
+            }
+        }
+
+        return beforeRxInputsCounts.values.reduce { acc, i -> lcm(acc, i) }
+    }
+
+    private fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
+
+    private fun lcm(a: Long, b: Long): Long = a * b / gcd(a, b)
+
+    fun resetModules() = modules.forEach { it.value.reset() }
+
+    fun part1() = println(highLowPulsesCounts(1000).values.reduce { acc, i -> acc * i })
+
+    fun part2() = println(pushesToGetRx())
 }
 
 fun main() {
     Day20.part1()
+    Day20.resetModules()
+    Day20.part2()
 }
