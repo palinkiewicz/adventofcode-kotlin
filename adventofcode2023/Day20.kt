@@ -4,6 +4,9 @@ import java.io.File
 import java.util.LinkedList
 
 object Day20 {
+    private const val BROADCASTER = "broadcaster"
+    private const val RX_OUTPUT = "rx"
+
     private val inputs = File("resources/adventofcode2023/Day20.txt")
         .readLines()
         .map { line ->
@@ -59,57 +62,44 @@ object Day20 {
         override fun reset() { lastPulses = inputs.associateWith { false }.toMutableMap() }
     }
 
-    private fun pushButton(): Map<Boolean, Long> {
-        val queue = LinkedList<Triple<String, Boolean, String>>()
-        val pulseCount = mutableMapOf(true to 0L, false to 0L)
-
-        queue.add(Triple("broadcaster", false, ""))
+    private fun pushButton(onEveryPulse: (String, Boolean, String) -> Unit) {
+        val queue = LinkedList(listOf(Triple(BROADCASTER, false, "")))
 
         while (queue.isNotEmpty()) {
             val (destination, pulse, from) = queue.removeFirst()
             val module = modules[destination]
 
-            pulseCount[pulse] = pulseCount[pulse]!!.plus(1)
+            onEveryPulse(destination, pulse, from)
 
             module?.send(pulse, from)?.forEach {
                 queue.add(Triple(it.key, it.value, destination))
+            }
+        }
+    }
+
+    private fun highLowPulsesCounts(times: Int): Map<Boolean, Long> {
+        val pulseCount = mutableMapOf(true to 0L, false to 0L)
+
+        for (i in 1..times) {
+            pushButton { _, pulse, _ ->
+                pulseCount[pulse] = pulseCount[pulse]!!.plus(1)
             }
         }
 
         return pulseCount
     }
 
-    private fun highLowPulsesCounts(times: Int): Map<Boolean, Long> {
-        val pulseCount = mutableMapOf(true to 0L, false to 0L)
-
-        for (i in 1..times)
-            pushButton().forEach { pulseCount[it.key] = pulseCount[it.key]!!.plus(it.value) }
-
-        return pulseCount
-    }
-
     private fun pushesToGetRx(): Long {
-        val beforeRxName = modules.filter { it.value.outputs.contains("rx") }.map { it.key }.single()
+        val beforeRxName = modules.filter { it.value.outputs.contains(RX_OUTPUT) }.map { it.key }.single()
         val beforeRxInputsCounts = modules.filter { it.value.outputs.contains(beforeRxName) }.mapValues { 0L }.toMutableMap()
         var pushCount = 0L
 
         while (beforeRxInputsCounts.any { it.value == 0L }) {
             pushCount++
 
-            val queue = LinkedList<Triple<String, Boolean, String>>()
-
-            queue.add(Triple("broadcaster", false, ""))
-
-            while (queue.isNotEmpty()) {
-                val (destination, pulse, from) = queue.removeFirst()
-                val module = modules[destination]
-
+            pushButton { destination, pulse, from ->
                 if (destination == beforeRxName && pulse) {
                     beforeRxInputsCounts[from] = pushCount
-                }
-
-                module?.send(pulse, from)?.forEach {
-                    queue.add(Triple(it.key, it.value, destination))
                 }
             }
         }
