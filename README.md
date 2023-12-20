@@ -26,3 +26,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 17: Clumsy Crucible](https://adventofcode.com/2023/day/17)               | [Solution](/adventofcode2023/Day17.kt)               | [Inputs](/resources/adventofcode2023/Day17.txt) |
 | [Day 18: Lavaduct Lagoon](https://adventofcode.com/2023/day/18)               | [Solution](/adventofcode2023/Day18.kt)               | [Inputs](/resources/adventofcode2023/Day18.txt) |
 | [Day 19: Aplenty](https://adventofcode.com/2023/day/19)                       | [Solution](/adventofcode2023/Day19.kt)               | [Inputs](/resources/adventofcode2023/Day19.txt) |
+| [Day 20: Pulse Propagation](https://adventofcode.com/2023/day/20)             | [Solution](/adventofcode2023/Day20.kt)               | [Inputs](/resources/adventofcode2023/Day20.txt) |
