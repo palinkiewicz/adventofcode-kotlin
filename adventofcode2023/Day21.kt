@@ -41,15 +41,18 @@ object Day21 {
 
     private fun stepPossibilities(numberOfSteps: Int): Int {
         val steps = LinkedList(listOf(startingStep()))
+        val possible = mutableListOf<Vector2>()
 
         while (steps.isNotEmpty()) {
             val current = steps.removeFirst()
 
-            if (current.stepCount == numberOfSteps) return steps.size + 1
-            else steps.addAll(neighbors(current).filterNot { steps.contains(it) })
+            if (current.stepCount > numberOfSteps) break
+            if ((current.stepCount + numberOfSteps) % 2 == 0) possible.add(current.position)
+
+            steps.addAll(neighbors(current).filterNot { steps.contains(it) || possible.contains(it.position) })
         }
 
-        throw Exception("Couldn't find the number of step possibilities for $numberOfSteps steps")
+        return possible.size
     }
 
     fun part1() = println(stepPossibilities(64))
