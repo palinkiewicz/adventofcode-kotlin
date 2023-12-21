@@ -27,3 +27,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 18: Lavaduct Lagoon](https://adventofcode.com/2023/day/18)               | [Solution](/adventofcode2023/Day18.kt)               | [Inputs](/resources/adventofcode2023/Day18.txt) |
 | [Day 19: Aplenty](https://adventofcode.com/2023/day/19)                       | [Solution](/adventofcode2023/Day19.kt)               | [Inputs](/resources/adventofcode2023/Day19.txt) |
 | [Day 20: Pulse Propagation](https://adventofcode.com/2023/day/20)             | [Solution](/adventofcode2023/Day20.kt)               | [Inputs](/resources/adventofcode2023/Day20.txt) |
+| [Day 21: Step Counter](https://adventofcode.com/2023/day/21)                  | [Solution (Part 1 only)](/adventofcode2023/Day21.kt) | [Inputs](/resources/adventofcode2023/Day21.txt) |
