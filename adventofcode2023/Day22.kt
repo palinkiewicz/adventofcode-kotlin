@@ -1,18 +1,12 @@
 package adventofcode2023
 
 import java.io.File
+import java.util.PriorityQueue
 
 object Day22 {
     private const val EMPTY = -1
     private const val FLOOR = 0
 
-//    private val bricks = ("1,0,1~1,2,1\n" +
-//            "0,0,2~2,0,2\n" +
-//            "0,2,3~2,2,3\n" +
-//            "0,0,4~0,2,4\n" +
-//            "2,0,5~2,2,5\n" +
-//            "0,1,6~2,1,6\n" +
-//            "1,1,8~1,1,9").split("\n")
     private val bricks = File("resources/adventofcode2023/Day22.txt")
         .readLines()
         .withIndex()
@@ -77,7 +71,7 @@ object Day22 {
         fun numberOfSupporting(): Int =
             verticalNeighborsIds(false).size
 
-        fun supports(): List<Brick> =
+        fun supportedBricks(): List<Brick> =
             verticalNeighborsIds(true).map { bricks[it - 1] }
 
         fun fall(): Boolean {
@@ -106,30 +100,24 @@ object Day22 {
 
     private fun numberOfSafeToDisintegrate(): Int =
         bricks.count { brick ->
-            brick.supports().all { it.numberOfSupporting() > 1 }
+            brick.supportedBricks().all { it.numberOfSupporting() > 1 }
         }
 
-    // This function doesn't work for the bigger input somehow...
-    // It works for the example input from the question
     private fun numberOfBrickThatWouldFall(brick: Brick): Int {
-        var currentBricks = brick.supports()
-        var lastIds = listOf(brick.id)
+        val currentBricks = PriorityQueue<Brick> { brick1, brick2 -> brick1.end.z - brick2.end.z }
+        val fallenIds = mutableListOf(brick.id)
         var fallenCount = 0
 
+        currentBricks.addAll(brick.supportedBricks())
+
         while (currentBricks.isNotEmpty()) {
-            val nextBricks = mutableListOf<Brick>()
-            val currentIds = mutableListOf<Int>()
+            val current = currentBricks.remove()
 
-            currentBricks.forEach { current ->
-                if (current.verticalNeighborsIds(false).all { lastIds.contains(it) }) {
-                    nextBricks.addAll(current.supports().filterNot { nextBricks.contains(it) })
-                    currentIds.add(current.id)
-                    fallenCount++
-                }
+            if (current.verticalNeighborsIds(false).all { fallenIds.contains(it) }) {
+                if (!fallenIds.contains(current.id)) fallenIds.add(current.id)
+                currentBricks.addAll(current.supportedBricks().filterNot { currentBricks.contains(it) })
+                fallenCount++
             }
-
-            currentBricks = nextBricks
-            lastIds = currentIds
         }
 
         println("${brick.id}: $fallenCount")
