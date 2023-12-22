@@ -28,3 +28,4 @@ I started taking part in the event in 2023 but may also consider doing tasks fro
 | [Day 19: Aplenty](https://adventofcode.com/2023/day/19)                       | [Solution](/adventofcode2023/Day19.kt)               | [Inputs](/resources/adventofcode2023/Day19.txt) |
 | [Day 20: Pulse Propagation](https://adventofcode.com/2023/day/20)             | [Solution](/adventofcode2023/Day20.kt)               | [Inputs](/resources/adventofcode2023/Day20.txt) |
 | [Day 21: Step Counter](https://adventofcode.com/2023/day/21)                  | [Solution (Part 1 only)](/adventofcode2023/Day21.kt) | [Inputs](/resources/adventofcode2023/Day21.txt) |
+| [Day 22: Sand Slabs](https://adventofcode.com/2023/day/22)                    | [Solution](/adventofcode2023/Day22.kt)               | [Inputs](/resources/adventofcode2023/Day22.txt) |
