@@ -13,7 +13,6 @@ object Day22 {
 //            "2,0,5~2,2,5\n" +
 //            "0,1,6~2,1,6\n" +
 //            "1,1,8~1,1,9").split("\n")
-
     private val bricks = File("resources/adventofcode2023/Day22.txt")
         .readLines()
         .withIndex()
@@ -110,13 +109,45 @@ object Day22 {
             brick.supports().all { it.numberOfSupporting() > 1 }
         }
 
-    fun part1() {
+    // This function doesn't work for the bigger input somehow...
+    // It works for the example input from the question
+    private fun numberOfBrickThatWouldFall(brick: Brick): Int {
+        var currentBricks = brick.supports()
+        var lastIds = listOf(brick.id)
+        var fallenCount = 0
+
+        while (currentBricks.isNotEmpty()) {
+            val nextBricks = mutableListOf<Brick>()
+            val currentIds = mutableListOf<Int>()
+
+            currentBricks.forEach { current ->
+                if (current.verticalNeighborsIds(false).all { lastIds.contains(it) }) {
+                    nextBricks.addAll(current.supports().filterNot { nextBricks.contains(it) })
+                    currentIds.add(current.id)
+                    fallenCount++
+                }
+            }
+
+            currentBricks = nextBricks
+            lastIds = currentIds
+        }
+
+        println("${brick.id}: $fallenCount")
+        return fallenCount
+    }
+
+    fun initialize() {
         initializeBricksMap()
         makeBricksFall()
-        println(numberOfSafeToDisintegrate())
     }
+
+    fun part1() = println(numberOfSafeToDisintegrate())
+
+    fun part2() = println(bricks.sumOf { numberOfBrickThatWouldFall(it) })
 }
 
 fun main() {
+    Day22.initialize()
     Day22.part1()
+    Day22.part2()
 }
